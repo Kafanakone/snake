@@ -9,19 +9,20 @@ window.onload = function(){
     var widthInBlocks = canvasWidth/blockSize;
     var heightInBlocks = canvasHeight/blockSize;
     var score;
+    var timeout;
     init();
 
     function init(){
         var canvas = document.createElement('canvas')
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;
-        canvas.style.border = "30px solid gray";
+        canvas.style.border = "30px solid #055005";
         canvas.style.margin = "auto";
         canvas.style.display = "block";
-        canvas.style.backgroundColor = "#ddd";
+        canvas.style.backgroundColor = "#8ecc39";
         document.body.appendChild(canvas);
         ctx = canvas.getContext('2d');
-        snakee = new snake([[6,4], [5,4], [4,4]], "right");
+        snakee = new snake([[0,4], [5,4]], "right");
         applee = new Apple([10,10]);
         score = 0;
         refreshCanvas();
@@ -46,7 +47,7 @@ window.onload = function(){
             drawScore()
             snakee.draw();
             applee.draw();
-            setTimeout(refreshCanvas,delay);
+            timeout = setTimeout(refreshCanvas,delay);
         }
         
     }
@@ -57,7 +58,7 @@ window.onload = function(){
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 10;
+        ctx.lineWidth = 5;
         var centreX = canvasWidth / 2;
         var centreY = canvasHeight / 2;
         ctx.strokeText("Game Over", centreX, centreY - 180);
@@ -67,15 +68,16 @@ window.onload = function(){
         ctx.restore();
     }
     function restart(){
-        snakee = new snake([[6,4], [5,4], [4,4]], "right");
+        snakee = new snake([[0,4], [5,4]], "right");
         applee = new Apple([10,10]);
         score = 0;
+        clearTimeout(timeout);
         refreshCanvas();
     }
     function drawScore(){
         ctx.save();
         ctx.font = "bold 200px sans-serif";
-        ctx.fillStyle = "gray";
+        ctx.fillStyle = "#000";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         var centreX = canvasWidth / 2;
@@ -94,7 +96,7 @@ window.onload = function(){
         this.ateApple = false; 
         this.draw = function(){
             ctx.save();
-            ctx.fillStyle = "#ff0000";
+            ctx.fillStyle = "#5076f9";
             for(var i = 0; i < this.body.length; i++){
                 drawBlock(ctx, this.body[i]);
             }
@@ -182,7 +184,7 @@ window.onload = function(){
         this.position = position;
         this.draw = function(){
             ctx.save();
-            ctx.fillStyle = "#33cc33";
+            ctx.fillStyle = "#f43706";
             ctx.beginPath();
             var raduis = blockSize/2;
             var x = this.position[0]*blockSize + raduis;
