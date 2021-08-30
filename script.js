@@ -35,7 +35,7 @@ window.onload = function(){
         else{
                 if(snakee.isEatingApple(applee)){
                     score++;
-                    delay -= 5;
+                    delay -= 1;
                     snakee.ateApple = true;
                     do{
                         applee.setNewPosition();
